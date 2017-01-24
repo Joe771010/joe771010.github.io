@@ -28807,6 +28807,7 @@
 	    }
 	    buttonClickStatus.push(tmp);
 	  }
+	  console.log('答案就是' + answers);
 	  return {
 	    stage: 0,
 	    status: 'playing',
@@ -36341,6 +36342,7 @@
 	    value: function render() {
 	      //<MenuItem onClick={this.menuClick1}><text style={menuItemStyle}>自我介紹</text></MenuItem>
 	      //<MenuItem onClick={this.menuClick2}><text style={menuItemStyle}>我的最愛</text></MenuItem>
+	      var innerHtml = { __html: "<a href=\"http://www.access-counter.net\" target=\"_blank\">" + "<img src=\"http://www.access-counter.net/services/imagedigits/counter.php?aut=9c161805adbe20c003d2af980024410304465966a12ca14c750c6bc386ff0db1c91463fd099f5d84c3\" alt=\"123456789\" height=30px/>" + "</a>" };
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -36387,6 +36389,16 @@
 	                '\u798F\u4E0D\u798F \uBCF5\uBD88\uBCF5'
 	              )
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: visitorStyle },
+	            _react2.default.createElement(
+	              'text',
+	              { style: visitorTextStyle },
+	              '\u8A2A\u5BA2\u4EBA\u6578'
+	            ),
+	            _react2.default.createElement('div', { dangerouslySetInnerHTML: innerHtml })
 	          )
 	        ),
 	        this.props.children
@@ -36413,6 +36425,16 @@
 
 	var linkStyle = {
 	  textDecoration: 'none'
+	};
+
+	var visitorStyle = {
+	  marginLeft: '15px',
+	  marginTop: '100px'
+	};
+
+	var visitorTextStyle = {
+	  fontFamily: 'Microsoft JhengHei',
+	  fontSize: '16px'
 	};
 
 	module.exports = Main;
@@ -45131,7 +45153,7 @@
 /* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -45157,25 +45179,16 @@
 	  }
 
 	  _createClass(Introduction, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	      var innerHtml = { __html: "<a href=\"http://www.access-counter.net\" target=\"_blank\">" + "<img src=\"http://www.access-counter.net/services/imagedigits/counter.php?aut=9c161805adbe20c003d2af980024410304465966a12ca14c750c6bc386ff0db1c91463fd099f5d84c3\" alt=\"無料カウンター\" border=\"0\" />" + "</a>" };
 	      return _react2.default.createElement(
-	        "div",
+	        'div',
 	        { style: contentStyle },
 	        _react2.default.createElement(
-	          "h2",
+	          'h2',
 	          { style: style1 },
-	          "Hi, I am Joe"
-	        ),
-	        _react2.default.createElement(
-	          "h2",
-	          { style: style2 },
-	          "\u8A2A\u5BA2\u4EBA\u6578"
-	        ),
-	        _react2.default.createElement("div", {
-	          dangerouslySetInnerHTML: innerHtml
-	        })
+	          'Hi, I am Joe'
+	        )
 	      );
 	    }
 	  }]);
@@ -45199,22 +45212,6 @@
 	};
 
 	module.exports = Introduction;
-
-	/*
-	<a href="http://www.access-counter.net" target="_blank">
-	<img src="http://www.access-counter.net/services/imagedigits/counter.php?aut=9c161805adbe20c003d2af980024410304465966a12ca14c750c6bc386ff0db1c91463fd099f5d84c3" alt="無料カウンター" border="0" />
-	</a>
-	*/
-
-	/*
-	<a href="http://www.reliablecounter.com" target="_blank">
-	  <img src="http://www.reliablecounter.com/count.php?page=joe771010.github.io&digit=style/plain/21/&reloads=0" alt="" title="" border="0" />
-	</a>
-	<br />
-	<a href="http://www.fabbly.com" target="_blank" style="font-family: Geneva, Arial; font-size: 9px; color: #330010; text-decoration: none;">
-	  3d printer open source
-	</a>
-	*/
 
 /***/ },
 /* 497 */
@@ -45336,11 +45333,11 @@
 	    key: 'getStageStatus',
 	    value: function getStageStatus(stageIndex) {
 	      if (this.gameState.status == 'playing') {
-	        if (this.gameState.stage <= stageIndex) return 'waiting';else return 'clear';
+	        if (this.gameState.stage <= stageIndex) return 'waiting';else return '福！';
 	      } else if (this.gameState.status == 'dead') {
-	        if (this.gameState.stage > stageIndex) return 'clear';else if (this.gameState.stage == stageIndex) return 'failed';else return 'waiting';
+	        if (this.gameState.stage > stageIndex) return 'clear';else if (this.gameState.stage == stageIndex) return '不福！';else return 'waiting';
 	      } else {
-	        return 'clear';
+	        return '福！';
 	      }
 	    }
 	  }]);
@@ -45460,6 +45457,18 @@
 	      );
 	    }
 	  }, {
+	    key: 'createFireworks',
+	    value: function createFireworks() {
+	      if (this.props.gameState.status != 'clear') return _react2.default.createElement('div', null);else {
+	        return _react2.default.createElement(
+	          'div',
+	          { className: 'fireworksArea' },
+	          _react2.default.createElement('img', { src: 'app/images/fireworks2.gif', className: 'fireworksImg' }),
+	          _react2.default.createElement('img', { src: 'app/images/fireworks1.gif', className: 'fireworksImg' })
+	        );
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this3 = this;
@@ -45481,7 +45490,8 @@
 	                return _this3.props.onResetClick();
 	              } })
 	          )
-	        )
+	        ),
+	        this.createFireworks()
 	      );
 	    }
 	  }]);
@@ -46537,7 +46547,7 @@
 
 
 	// module
-	exports.push([module.id, ".maintStyle {\r\n  padding-left: 200px;\r\n}\r\n\r\n.stageStyle {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  margin-bottom: 30px;\r\n  width: 600px;\r\n}\r\n\r\n.gamePartStyle {\r\n  width: 70%;\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\n\r\n.messagePartStyle {\r\n  width: 30%;\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\n\r\n.stageStatusStyle {\r\n  font-size: 28px;\r\n  font-family: Microsoft JhengHei;\r\n}\r\n\r\n.titleStyle {\r\n  height: 20%;\r\n  width: 600px;\r\n  margin-bottom: 30px;\r\n  margin-left: 20px;\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.titleImageStyle {\r\n  width: 100px;\r\n  height: 100px;\r\n}\r\n\r\n.titleTextStyle {\r\n  font-size: 50px;\r\n  font-family: DFKai-sb;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\r\n}\r\n\r\n\r\n.resetButtonStyle  {\r\n  margin: 5px;\r\n}\r\n\r\n.luckButtonInactive {\r\n  cursor: not-allowed;\r\n}\r\n", ""]);
+	exports.push([module.id, ".maintStyle {\r\n  padding-left: 200px;\r\n}\r\n\r\n.stageStyle {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  margin-bottom: 30px;\r\n  width: 600px;\r\n}\r\n\r\n.gamePartStyle {\r\n  width: 70%;\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\n\r\n.messagePartStyle {\r\n  width: 30%;\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\n\r\n.stageStatusStyle {\r\n  font-size: 28px;\r\n  font-family: Microsoft JhengHei;\r\n}\r\n\r\n.titleStyle {\r\n  height: 20%;\r\n  width: 600px;\r\n  margin-bottom: 30px;\r\n  margin-left: 20px;\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.titleImageStyle {\r\n  width: 100px;\r\n  height: 100px;\r\n}\r\n\r\n.titleTextStyle {\r\n  font-size: 50px;\r\n  font-family: DFKai-sb;\r\n  margin-left: 10px;\r\n  margin-right: 10px;\r\n}\r\n\r\n\r\n.resetButtonStyle  {\r\n  margin: 5px;\r\n}\r\n\r\n.luckButtonInactive {\r\n  cursor: not-allowed;\r\n}\r\n\r\n.fireworksArea {\r\n  position: absolute;\r\n  top: 200px;\r\n  left: 250px;\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\n\r\n.fireworksImg {\r\n  width: 150px;\r\n  height: 150px;\r\n  margin: 50px;\r\n}\r\n", ""]);
 
 	// exports
 
